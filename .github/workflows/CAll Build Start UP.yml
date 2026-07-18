@@ -11,11 +11,6 @@ on:
         description: "我已看完README.md,了解此工作流的风险和作用,有能力取消卡住的工作流运行和删除缓存,并执意继续运行"
         required: true
         default: "请输入完整标题"
-      AETHER_OPT:
-        type: boolean
-        description: "是否编译并打包 Aether OptExt 模块"
-        required: true
-        default: false
 
 permissions:
   actions: read
@@ -128,28 +123,15 @@ jobs:
           inputs: |
             {
               "FILE": "${{ matrix.file }}",
-              "SUSFS_CI": "N/A",
-              "KPM": "KPM",
-              "SUSFS_META": "",
-              "DYNAMIC_REPO": "Numbersf",
+              "SUSFS_CI": "NoN",
+              "KSU_META": "susfs-main/Numbersf/",
               "BUILD_TIME": "F",
-              "KSU_META": "main/builtin/Numbersf/",
-              "LZ4_UPDATE": "false",
-              "ZRAM": "0/lz4kd/8589934592",
               "SUFFIX": "",
-              "RESUBLEVEL": "",
               "FAST_BUILD": "true",
-              "AETHER_OPT": "${{ github.event.inputs.AETHER_OPT }}",
-              "LSM_BBG": "true",
-              "NETFILTER": "true",
-              "CCM": "true",
-              "UNICODE_BYPASS": "false",
-              "SCHED_HMBIRD": "${{ matrix.enable_sched }}",
-              "DROID_SPACES": "false",
-              "RE_KERNEL": "false",
-              "SUSFS_DEV": "false",
-              "SPACE_NOCLEAN": "false",
-              "BUILD_NOCACHE": "false"
+              "HOOK": "manual",
+              "LSM": "true",
+              "SCHED": "${{ matrix.enable_sched }}",
+              "ZRAM": "false"
             }
 
       - name: Wait for Builds to Finish or Exit Early
