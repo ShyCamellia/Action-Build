@@ -6,7 +6,7 @@ on:
         type: choice
         description: "配置文件//Configuration file"
         required: true
-        default: oneplus_ace2_pro_b
+        default: oneplus_ace_2v_b
         options:
           - oneplus_nord_n30_se_5g_v
           - oneplus_10r_v
@@ -66,7 +66,7 @@ on:
         type: choice
         description: "SUSFS模块下载调用方向//SUSFS module branch"
         required: true
-        default: N/A
+        default: CI
         options:
           - CI
           - Release
@@ -94,7 +94,7 @@ on:
         type: string
         description: "自定义构建时间(输入F使用UTCT或-1关闭)//Custom build time (Enter F to use UTCT, or -1 to disable)"
         required: false
-        default: "Fri Dec 12 11:37:03 UTC 2025"
+        default: "F"
       KSU_META:
         type: string
         description: "管理器分支名(必填)/内置分支名(必填)/自定义版本标识(留空不修改)/回退分支提交哈希版本(留空不修改)//Manager Branch name (Required) / Builtin branch name (Required) / Custom version identifier (Leave blank to not modify) / Rollback branch commit hash version (Leave blank to not modify)"
@@ -104,7 +104,7 @@ on:
         type: boolean
         description: "是否升级LZ4到上游最新？//Upgrade LZ4 to the latest upstream?"
         required: true
-        default: false
+        default: true
       ZRAM:
         type: string
         description: "ZRAM(0关闭1开启)/算法名/大小//ZRAM (0: disable, 1: enable) / Algorithm name / Size"
@@ -128,7 +128,7 @@ on:
         type: boolean
         description: "是否编译并打包 Aether OptExt 模块？//Build and package the Aether OptExt module?"
         required: true
-        default: false
+        default: true
       LSM_BBG:
         type: boolean
         description: "是否启用关键分区写入保护模块(BBG)？//Enable critical partition write protection module (BBG)?"
@@ -168,7 +168,7 @@ on:
         type: boolean
         description: "是否拉取SUSFS-DEV分支？//Pull the SUSFS-DEV branch?"
         required: true
-        default: false
+        default: true
       SPACE_NOCLEAN:
         type: boolean
         description: "是否停用空间清扫？//Disable workspace cleaning?"
