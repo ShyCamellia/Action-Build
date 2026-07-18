@@ -201,7 +201,7 @@ jobs:
           root-reserve-mb: 8192
           temp-reserve-mb: 2048
           remove-dotnet: 'true'
-          remove-android: 'true'
+          remove-android: ${{ github.event.inputs.AETHER_OPT == 'true' && 'false' || 'true' }}
           remove-haskell: 'true'
           remove-codeql: 'true'
 
@@ -1367,6 +1367,18 @@ jobs:
           git clone --depth=1 https://github.com/NetizenNemo/Aether_OptExt.git
           sed -i 's/let mut buf = \[0i8; 8192\];/let mut buf = [0u8; 8192];/' Aether_OptExt/src/process.rs
           rustup target add aarch64-linux-android
+
+          NDK_ROOT="${ANDROID_NDK_HOME:-${ANDROID_NDK_LATEST_HOME:-}}"
+          if [ -z "$NDK_ROOT" ] && [ -n "${ANDROID_HOME:-}" ] && [ -d "$ANDROID_HOME/ndk" ]; then
+            NDK_ROOT=$(find "$ANDROID_HOME/ndk" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)
+          fi
+          if [ -z "$NDK_ROOT" ] || [ ! -d "$NDK_ROOT/toolchains/llvm/prebuilt" ]; then
+            echo "❌ Android NDK 不存在，无法编译 Aether OptExt" >&2
+            exit 1
+          fi
+          export ANDROID_NDK_HOME="$NDK_ROOT"
+          echo "✅ Android NDK: $ANDROID_NDK_HOME"
+
           python3 Aether_OptExt/build.py
 
           AETHER_MODULE_ZIP=$(find "$PWD/Aether_OptExt/out" -maxdepth 1 -type f -name 'Aether-OptExt_*.zip' -print -quit)
