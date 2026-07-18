@@ -128,16 +128,28 @@ jobs:
           inputs: |
             {
               "FILE": "${{ matrix.file }}",
-              "SUSFS_CI": "NoN",
-              "KSU_META": "susfs-main/Numbersf/",
+              "SUSFS_CI": "N/A",
+              "KPM": "KPM",
+              "SUSFS_META": "",
+              "DYNAMIC_REPO": "Numbersf",
               "BUILD_TIME": "F",
+              "KSU_META": "main/builtin/Numbersf/",
+              "LZ4_UPDATE": "false",
+              "ZRAM": "0/lz4kd/8589934592",
               "SUFFIX": "",
+              "RESUBLEVEL": "",
               "FAST_BUILD": "true",
               "AETHER_OPT": "${{ github.event.inputs.AETHER_OPT }}",
-              "HOOK": "manual",
-              "LSM": "true",
-              "SCHED": "${{ matrix.enable_sched }}",
-              "ZRAM": "false"
+              "LSM_BBG": "true",
+              "NETFILTER": "true",
+              "CCM": "true",
+              "UNICODE_BYPASS": "false",
+              "SCHED_HMBIRD": "${{ matrix.enable_sched }}",
+              "DROID_SPACES": "false",
+              "RE_KERNEL": "false",
+              "SUSFS_DEV": "false",
+              "SPACE_NOCLEAN": "false",
+              "BUILD_NOCACHE": "false"
             }
 
       - name: Wait for Builds to Finish or Exit Early
